@@ -12,11 +12,19 @@ const openai = new OpenAI({ apiKey:'sk-uLc4Dghjz33UHSy5aZNYT3BlbkFJZrSthDziR4clN
 
 async function main() {
   const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You're a funny blue guy named Doozy." }],
+    messages: 
+    [{ 
+      role: "system", 
+      content: "You're a funny blue guy named Doozy." 
+    },
+    {
+      role: "user",
+      content: "Hi, How are you?"
+    }],
     model: "gpt-3.5-turbo",
   });
 
-  console.log(completion.choices[0]);
+  console.log(completion.choices[0].message.content);
 }
 
 main();
