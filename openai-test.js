@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-const Openai = require("openai");
+const OpenAI = require("openai");
 
 //our api key goes here
 const openai = new OpenAI({ apiKey:'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'}); //replace 'API Key' with your API key
