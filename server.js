@@ -7,7 +7,7 @@ const app = express();
 const OpenAI = require("openai");
 
 //our api key goes here
-const openai = new OpenAI({ apiKey:'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'}); //replace 'API Key' with your API key
+const openai = new OpenAI({ apiKey:'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'}); //API key should work now if I put money on my account. -Cooper
 
 
 async function main() {
