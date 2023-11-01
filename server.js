@@ -1,4 +1,8 @@
 import OpenAI from "openai";
+import express from "express";
+
+const express = require('express');
+const app = express();
 
 const OpenAI = require("openai");
 
