@@ -1,30 +1,59 @@
-import OpenAI from "openai";
-import express from "express";
-
+const OpenAI = require('openai');
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
 
-const OpenAI = require("openai");
+//OpenAI API key
+const apiKey = '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';
+const openai = new OpenAI({ apiKey });
 
-//our api key goes here
-const openai = new OpenAI({ apiKey:'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'}); //API key should work now if I put money on my account. -Cooper
+// Middleware for Express to handle data and static files
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-async function main() {
+// Defines an array to store the chat messages
+const chatHistory = [
+  {
+    role: "system",
+    content: "You're a funny, friendly, blue guy named Doozy."
+  }
+];
+
+// Creates the HTML form for users to input messages and links it to the webpage html/css
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.post('/chat', async (req, res) => {
+  const userMessage = req.body.message;
+
+  // Adds the user's message to the chat history
+  chatHistory.push({ role: 'user', content: userMessage });
+
+  // Generates a response from GPT-3
   const completion = await openai.chat.completions.create({
-    messages: 
-    [{ 
-      role: "system", 
-      content: "You're a funny blue guy named Doozy." 
-    },
-    {
-      role: "user",
-      content: "Hi, How are you?"
-    }],
-    model: "gpt-3.5-turbo",
+    messages: chatHistory,
+    model: 'gpt-3.5-turbo',
   });
 
-  console.log(completion.choices[0].message.content);
-}
+  // Extracts and sends the model's reply
+  const modelReply = completion.choices[0].message.content;
+  chatHistory.push({ role: 'assistant', content: modelReply });
 
-main();
+  // Display the chat history in the response
+  res.send(`
+    <form action="/chat" method="post">
+      <input type="text" name="message" placeholder="Type your message">
+      <button type="submit">Send</button>
+    </form>
+    <p>You: ${userMessage}</p>
+    <p>Doozy: ${modelReply}</p>
+  `);
+});
+
+app.listen(3000, () => {
+  console.log('Chatbot server is running on port 3000');
+});
