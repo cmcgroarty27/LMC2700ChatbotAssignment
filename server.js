@@ -1,3 +1,4 @@
+//imports; OpenAI API, Express, Body Parser
 const OpenAI = require('openai');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -14,11 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Defines an array to store the chat messages
+// Defines an array to store the chat messages. Establishes the bot's role and personality.
 const chatHistory = [
   {
     role: "system",
-    content: "You're a funny, friendly, blue guy named Doozy."
+    content: "You're a funny, friendly, conversational, blue guy named Doozy."
   }
 ];
 
@@ -54,6 +55,7 @@ app.post('/chat', async (req, res) => {
   `);
 });
 
+
 app.listen(3000, () => {
-  console.log('Chatbot server is running on port 3000');
+  console.log('Chatbot server is running at localhost:3000');
 });
