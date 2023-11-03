@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 
 //OpenAI API key
-const apiKey = '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';
+const apiKey = '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';
 const openai = new OpenAI({ apiKey });
 
 // Middleware for Express to handle data and static files
