@@ -4,18 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Doozey Chat</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css"> //link css
     </head>
     <body>
-        <div id="scene-container">
-            <h1>DoozyChat</h1>
-        </div>
-        <form action="/chat" method="post" class="form-flex">
-                <input type="text" id="subbox" name="message" placeholder="Your message here">
-                <button type="submit">Send</button>
+        <h1>DoozyChat</h1>
+        <form action="/chat" method="post" class="form-flex"> // creates form for input
+                <input type="text" id="subbox" name="message" placeholder="Your message here"> // creates input box
+                <button type="submit">Send</button> //creates submit button
           </form>
-        <script type="module" src="../server.js"></script>
-        <script type = "module" src="3dmodel.js"></script>
+        <script type="module" src="../server.js"></script> //links server.js to index.html
     </body>
 </html>
